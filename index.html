@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#f4f1e9" />
+    <meta name="description" content="Explore quantized states in a one-dimensional infinite potential well. An interactive physics model by Shubh Gupta." />
+    <title>Particle in a 1D Potential Well — Shubh Gupta</title>
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,500;9..144,600&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/styles.css" />
+    <script src="/app.js" defer></script>
+  </head>
+  <body>
+    <div class="page-shell">
+      <header class="topbar">
+        <a class="brand" href="#top" aria-label="The Quantum Box home">
+          <span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 36 36"><path d="M7 5v26M29 5v26M9 18c3.5 0 3.5-9 9-9s5.5 18 10 18" /></svg></span>
+          <span class="brand-label">A LITTLE QUANTUM LAB</span>
+        </a>
+        <div class="top-meta"><span class="live-dot"></span> INTERACTIVE MODEL <span class="meta-divider">/</span> 01</div>
+      </header>
+
+      <main id="top">
+        <section class="intro" aria-labelledby="page-title">
+          <div class="intro-copy">
+            <p class="eyebrow"><span class="eyebrow-line"></span> QUANTUM MECHANICS · THE PARTICLE IN A BOX</p>
+            <h1 id="page-title">A particle.<br />A box. <em>Endless</em><br class="mobile-break" /> possibilities.</h1>
+            <p class="intro-description">What happens when a quantum particle has nowhere to go? Explore how confining it to a tiny space turns its energy into a set of allowed steps.</p>
+          </div>
+          <aside class="intro-aside" aria-label="Model summary">
+            <div class="aside-index">01 <span>—</span> THOUGHT EXPERIMENT</div>
+            <p>One dimension.<br />Perfectly hard walls.<br />Surprisingly rich physics.</p>
+            <span class="credit">A working model <span>by Shubh Gupta</span></span>
+          </aside>
+        </section>
+
+        <section class="lab" aria-labelledby="lab-heading">
+          <div class="section-heading">
+            <div><span class="section-number">01</span><h2 id="lab-heading">The quantum box</h2></div>
+            <span class="model-tag"><span class="live-dot"></span> LIVE MODEL</span>
+          </div>
+
+          <div class="lab-layout">
+            <div class="visual-column">
+              <article class="chart-card box-card">
+                <div class="card-heading">
+                  <div><span class="chart-index">A / THE SYSTEM</span><h3>Inside the well</h3></div>
+                  <span class="unit-tag">V = 0 eV</span>
+                </div>
+                <div class="well-wrap">
+                  <svg id="well-svg" viewBox="0 0 720 210" role="img" aria-label="Potential well with a particle confined between two walls">
+                    <defs>
+                      <linearGradient id="wellGlow" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#56a899" stop-opacity=".20"/><stop offset="1" stop-color="#56a899" stop-opacity="0"/></linearGradient>
+                    </defs>
+                    <g class="well-grid"><line x1="72" y1="30" x2="648" y2="30"/><line x1="72" y1="72" x2="648" y2="72"/><line x1="72" y1="114" x2="648" y2="114"/><line x1="72" y1="156" x2="648" y2="156"/></g>
+                    <text class="svg-axis-label" x="18" y="28">V(x)</text>
+                    <text class="svg-wall-label" x="72" y="19">∞</text><text class="svg-wall-label" x="648" y="19">∞</text>
+                    <path class="potential-line" d="M72 182V30H648V182" />
+                    <rect class="well-fill" x="74" y="32" width="572" height="149" />
+                    <line class="base-line" x1="72" y1="182" x2="648" y2="182" />
+                    <g id="measurement-mark" class="measurement-mark is-hidden">
+                      <line id="measurement-line" x1="358" y1="48" x2="358" y2="181" />
+                      <circle id="measurement-dot" cx="358" cy="179" r="6" />
+                      <text id="measurement-label" x="358" y="43" text-anchor="middle">x = — nm</text>
+                    </g>
+                    <text class="svg-bottom-label" x="72" y="203" text-anchor="middle">0</text>
+                    <text class="svg-bottom-label" x="360" y="203" text-anchor="middle">POSITION x</text>
+                    <text class="svg-bottom-label" x="648" y="203" text-anchor="middle">L</text>
+                  </svg>
+                </div>
+                <div class="box-caption"><span><i class="caption-swatch wall-swatch"></i>Impenetrable walls</span><span><i class="caption-swatch inside-swatch"></i>Allowed region: 0 &lt; x &lt; L</span><span id="box-width-caption">L = 1.00 nm</span></div>
+              </article>
+
+              <div class="plots-grid">
+                <article class="chart-card plot-card">
+                  <div class="card-heading compact">
+                    <div><span class="chart-index">B / AMPLITUDE</span><h3>Wavefunction <span class="math">ψ<sub>n</sub>(x)</span></h3></div>
+                    <span class="plot-signature">±</span>
+                  </div>
+                  <div class="chart-wrap"><canvas id="wave-chart" aria-label="Wavefunction graph, with position along the horizontal axis and amplitude along the vertical axis"></canvas></div>
+                  <div class="chart-axis"><span>0</span><span>POSITION x / L</span><span>1</span></div>
+                  <p class="chart-note">The wave changes sign at each node.</p>
+                </article>
+                <article class="chart-card plot-card density-card">
+                  <div class="card-heading compact">
+                    <div><span class="chart-index">C / LIKELIHOOD</span><h3>Probability <span class="math">|ψ<sub>n</sub>(x)|²</span></h3></div>
+                    <span class="plot-signature density-signature">ρ</span>
+                  </div>
+                  <div class="chart-wrap"><canvas id="density-chart" aria-label="Probability density graph, with position along the horizontal axis and probability density along the vertical axis"></canvas></div>
+                  <div class="chart-axis"><span>0 nm</span><span>POSITION x</span><span id="density-axis-end">1.00 nm</span></div>
+                  <p class="chart-note">Across 0 ≤ x ≤ L, ∫ |ψₙ(x)|² dx = 1.</p>
+                </article>
+              </div>
+            </div>
+
+            <aside class="control-column" aria-label="Model controls and energy level">
+              <article class="control-card">
+                <div class="control-card-header"><span class="chart-index">TUNE THE MODEL</span><span class="control-spark" aria-hidden="true">✳</span></div>
+                <div class="control-group state-control">
+                  <div class="control-label-row"><label for="state-range">Quantum state <span class="math">n</span></label><output id="state-output" for="state-range">n = 1</output></div>
+                  <input id="state-range" type="range" min="1" max="5" value="1" step="1" aria-label="Quantum state n, from 1 to 5" />
+                  <div class="range-ticks" aria-hidden="true"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span></div>
+                  <div class="micro-copy">Higher state → more nodes, more energy.</div>
+                </div>
+                <div class="control-rule"></div>
+                <div class="control-group width-control">
+                  <div class="control-label-row"><label for="width-range">Box width <span class="math">L</span></label><output id="width-output" for="width-range">1.00 <small>nm</small></output></div>
+                  <input id="width-range" type="range" min="0.50" max="2.00" value="1.00" step="0.05" aria-label="Box width from 0.50 to 2.00 nanometres" />
+                  <div class="range-ticks width-ticks" aria-hidden="true"><span>0.50 nm</span><span>2.00 nm</span></div>
+                  <div class="micro-copy">Wider box → closer energy levels.</div>
+                </div>
+                <div class="control-rule"></div>
+                <div class="energy-readout" aria-live="polite">
+                  <span class="chart-index">ALLOWED ENERGY</span>
+                  <div class="energy-value-line"><span id="energy-value" class="energy-value">0.376</span><span class="energy-unit">eV</span><span class="energy-level" id="energy-level">E₁</span></div>
+                  <div class="energy-footnote">For an electron · <span id="energy-e1">E₁ = 0.376 eV</span></div>
+                </div>
+              </article>
+
+              <article class="ladder-card">
+                <div class="ladder-header"><span class="chart-index">THE ENERGY LADDER</span><span class="ladder-ratio">E / E₁</span></div>
+                <div id="energy-ladder" class="energy-ladder" role="img" aria-label="Quantized energy levels for the first five quantum states"></div>
+                <div class="ladder-caption"><span class="ladder-selected-dot"></span> YOUR STATE <span id="ladder-selected-label">n = 1</span></div>
+              </article>
+
+              <button id="measure-button" class="measure-button" type="button"><span class="button-icon" aria-hidden="true">⌖</span><span><strong>Measure the particle</strong><small>Draw one position from |ψ|²</small></span><span class="button-arrow" aria-hidden="true">↗</span></button>
+              <p id="measure-feedback" class="measure-feedback" aria-live="polite">Before measurement, position is described by probability.</p>
+            </aside>
+          </div>
+        </section>
+
+        <section class="explainer" aria-labelledby="explainer-heading">
+          <div class="explainer-heading"><span class="section-number">02</span><h2 id="explainer-heading">The simple setup.<br /><em>The surprising result.</em></h2></div>
+          <div class="explainer-content">
+            <p class="explainer-lead">In classical physics, a ball could have any energy in a box. A quantum particle is different: its wave must fit neatly between the walls, like a plucked string.</p>
+            <div class="equation-strip" aria-label="Wavefunction and energy equations">
+              <div class="equation"><span class="equation-label">ALLOWED WAVE</span><span class="equation-text">ψ<sub>n</sub>(x) = √<span class="fraction"><span>2</span><span>L</span></span> sin(<span class="fraction"><span>nπx</span><span>L</span></span>)</span></div>
+              <div class="equation-divider"></div>
+              <div class="equation"><span class="equation-label">ALLOWED ENERGY</span><span class="equation-text">E<sub>n</sub> = <span class="fraction"><span>n²h²</span><span>8mL²</span></span></span></div>
+            </div>
+            <div class="insights-row">
+              <div class="insight"><span class="insight-num">01</span><p><strong>No zero-energy state.</strong> Even the lowest wave has curvature, so the particle has a minimum energy: the zero-point energy.</p></div>
+              <div class="insight"><span class="insight-num">02</span><p><strong>Nodes are forbidden spots.</strong> The <span class="math">n</span>th state has <span class="math">n − 1</span> interior nodes where the probability of finding the particle is zero.</p></div>
+              <div class="insight"><span class="insight-num">03</span><p><strong>Small box, big energy gaps.</strong> Energy scales as <span class="math">1/L²</span>—halve the width and each level becomes four times higher.</p></div>
+            </div>
+            <p class="assumption-note"><span class="note-asterisk">*</span> Idealised model: an electron of mass <span class="math">m</span> in a one-dimensional infinite potential well. The displayed energy is calculated in electronvolts for the selected width.</p>
+          </div>
+        </section>
+      </main>
+
+      <footer class="footer">
+        <div class="footer-left"><span class="brand-mark footer-mark" aria-hidden="true"><svg viewBox="0 0 36 36"><path d="M7 5v26M29 5v26M9 18c3.5 0 3.5-9 9-9s5.5 18 10 18" /></svg></span><span>THE QUANTUM BOX</span></div>
+        <span class="footer-credit">A working model by <strong>Shubh Gupta</strong></span>
+        <a class="back-top" href="#top">BACK TO TOP ↑</a>
+      </footer>
+    </div>
+  </body>
+</html>
